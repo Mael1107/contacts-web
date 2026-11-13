@@ -1,3 +1,4 @@
+import ContactList from "./components/contact-list";
 import api from "./lib/api";
 import { Contact } from "./types";
 
@@ -11,26 +12,10 @@ const getContacts = async (): Promise<Contact[]> => {
 const Home = async () => {
   const contacts = await getContacts()
 
-  if (contacts.length === 0) {
-    return (
-      <main>
-        No Contacts yet. Add one above!
-      </main>
-    )
-  }
-
-  return (  
-    <main>
-      <ul>
-        {contacts.map(contact => (
-          <li key={contact.id}>
-            <p>{contact.name}</p>
-            <p>{contact.phone}</p>
-            {contact.email && <p>{contact.email}</p>}
-            {contact.notes && <p>{contact.notes}</p>}
-          </li>
-        ))}
-      </ul>
+  return (
+    <main className="flex flex-col justify-center items-center mt-10">
+      <h1 className="text-center text-5xl font-bold text-emerald-900">Contacts List</h1>
+      <ContactList contacts={contacts} />
     </main>
   )
 }
