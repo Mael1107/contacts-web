@@ -1,0 +1,20 @@
+import ContactForm from "@/app/components/contact-form"
+import Link from "next/link"
+import { ChevronLeft } from "lucide-react"
+
+const ContactFormPage = () => {
+    return (
+        <main className="flex flex-col items-center gap-13">
+            <Link 
+                aria-label="back to contact list" 
+                className="text-emerald-900 self-start ml-1 mt-3 hover:" 
+                href="/">
+                    <ChevronLeft size={30} strokeWidth={3} />
+            </Link>
+            <h1 className="text-5xl font-bold text-emerald-900 text-shadow-lg mt-6" >New Contact</h1>
+            <ContactForm />
+        </main>
+    )
+}
+
+export default ContactFormPage

@@ -13,7 +13,7 @@ const ContactList = ({contacts}: ContactListProps) => {
     }
 
     return (
-        <ul className="bg-white p-5 mt-10 max-w-xs w-full flex flex-col rounded-xl gap-5 shadow-xl">
+        <ul className="bg-white p-5  max-w-xs w-full flex flex-col rounded-xl gap-5 shadow-xl">
             {contacts.map(contact => (
                 <ContactCard key={contact.id} contact={contact} />
             ))}
