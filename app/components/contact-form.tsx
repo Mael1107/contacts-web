@@ -1,33 +1,66 @@
 "use client"
-
-import {useRouter} from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { createContact } from "../services/contacts"
+import { CircleAlert } from "lucide-react"
 
 const inputClass = "w-full p-2 rounded-md border-b-2 border-emerald-800/40 placeholder:text-gray-500 focus:outline-none focus:bg-emerald-200 focus:border-emerald-800 transition-colors" 
 
 const ContactForm = () => {
     const [form, setForm] = useState({name: "", phone: "", email: "", notes: ""})
+    const [error, setError] = useState("")
     const router = useRouter()
+
     const handleChange = (e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setForm(prev => ({...prev, [e.target.name]: e.target.value}))
+        setError("")
     }
 
     const handleSubmit = async (e: React.SubmitEvent) => {
         e.preventDefault()
+        setError("")
+
+        const trimmedData = {
+            name: form.name.trim(),
+            phone: form.phone.trim(),
+            email: form.email.trim(),
+            notes: form.notes.trim()
+        }
+
+        if (trimmedData.name === "") {
+            setError("Name cannot be blank! Please fill in correctly and try again.")
+            return 
+        }
+
+        if (trimmedData.phone === "") {
+            setError("Phone cannot be blank! Please fill in correctly and try again.")
+            return 
+        }
+
+        if (trimmedData.email && !trimmedData.email.includes("@") ) {
+            setError("Email must contain @! Please fill in correctly and try again.")
+            return
+        }
 
         try {
-            await createContact(form)
+            await createContact(trimmedData)
             router.push("/")
         } catch (err) {
             console.error(err)
+            setError("Could not create contact. Please try again.")
         }
-        
     }
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col max-w-xs w-full gap-6 text-emerald-900 font-semibold">
+        <form noValidate onSubmit={handleSubmit} className="flex flex-col max-w-xs w-full gap-6 text-emerald-900 font-semibold">
+
+            {error && <div className="flex justify-between gap-3 items-center gadiv-2 bg-red-50 text-red-700 border-l-4 border-red-500 rounded-md p-3 text-sm">
+                <CircleAlert size={26} strokeWidth={3} />
+                <p>{error}</p>
+            </div>}
+
             <div className="flex flex-col gap-3 bg-white p-2 py-4 rounded-lg shadow-lg">
+
                 <input
                 className={inputClass}
                 name="name"
@@ -57,15 +90,17 @@ const ContactForm = () => {
                     value={form.notes}
                     onChange={handleChange}
                     placeholder="Notes"
-                    className={`${inputClass} resize-none`} rows={3}
+                    className="w-full p-2 rounded-md border-b-2 border-l-2 border-emerald-800/40 placeholder:text-gray-500 focus:outline-none focus:bg-emerald-200 focus:border-emerald-800 transition-colors resize-none " rows={3}
                     >
                 </textarea>
             </div>
+
             <button 
                 type="submit" 
                 className="bg-emerald-700 text-xl rounded-lg text-white p-2 cursor-pointer hover:bg-emerald-800 shadow-md hover:text-emerald-200 transition">
                     Add Contact
             </button>
+
         </form>
     )
 }
