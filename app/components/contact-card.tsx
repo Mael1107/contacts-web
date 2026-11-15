@@ -1,5 +1,6 @@
 import { Contact } from "../types";
-import { Pencil, Trash2 } from "lucide-react";
+import { Pencil } from "lucide-react";
+import DeleteButton from "./delete-button";
 
 interface ContactCardProps {
     contact: Contact
@@ -18,9 +19,7 @@ const ContactCard = ({contact}: ContactCardProps) => {
                 <button aria-label="Edit contact" className="text-emerald-950 cursor-pointer hover:text-white hover:bg-emerald-500 rounded-lg p-1 transition-all">
                     <Pencil size={21} />
                 </button>
-                <button aria-label="Delete contact" className="text-emerald-950 cursor-pointer hover:text-white hover:bg-red-500 rounded-lg p-1 transition-all">
-                    <Trash2 size={21}  />
-                </button>
+                <DeleteButton id={contact.id} />
             </div>
         </li>
     )

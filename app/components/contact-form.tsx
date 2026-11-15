@@ -54,7 +54,7 @@ const ContactForm = () => {
     return (
         <form noValidate onSubmit={handleSubmit} className="flex flex-col max-w-xs w-full gap-6 text-emerald-900 font-semibold">
 
-            {error && <div className="flex justify-between gap-3 items-center gadiv-2 bg-red-50 text-red-700 border-l-4 border-red-500 rounded-md p-3 text-sm">
+            {error && <div role="alert" className="flex justify-between gap-3 items-center bg-red-50 text-red-700 border-l-4 border-red-500 rounded-md p-3 text-sm">
                 <CircleAlert size={26} strokeWidth={3} />
                 <p>{error}</p>
             </div>}
@@ -90,7 +90,7 @@ const ContactForm = () => {
                     value={form.notes}
                     onChange={handleChange}
                     placeholder="Notes"
-                    className="w-full p-2 rounded-md border-b-2 border-l-2 border-emerald-800/40 placeholder:text-gray-500 focus:outline-none focus:bg-emerald-200 focus:border-emerald-800 transition-colors resize-none " rows={3}
+                    className={`${inputClass} border-l-2 resize-none`} rows={3}
                     >
                 </textarea>
             </div>

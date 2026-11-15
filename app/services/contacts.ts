@@ -18,3 +18,5 @@ export const createContact = async (data: CreateContactData): Promise<Contact> =
     const response = await api.post<Contact>("/contacts", {contact: data})
     return response.data
 }
+
+export const deleteContact = async (id: number): Promise<void> => await api.delete(`/contacts/${id}`)

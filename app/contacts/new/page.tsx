@@ -11,7 +11,7 @@ const ContactFormPage = () => {
                 href="/">
                     <ChevronLeft size={30} strokeWidth={3} />
             </Link>
-            <h1 className="text-5xl font-bold text-emerald-900 text-shadow-lg mt-6" >New Contact</h1>
+            <h1 className="text-5xl font-bold text-emerald-900 text-shadow-lg mt-6">New Contact</h1>
             <ContactForm />
         </main>
     )
