@@ -1,13 +1,25 @@
 "use client"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { createContact } from "../services/contacts"
+import { createContact, updateContact } from "../services/contacts"
 import { CircleAlert } from "lucide-react"
+import { Contact } from "../types"
+
+interface ContactFormProps {
+    contact?: Contact
+}
 
 const inputClass = "w-full p-2 rounded-md border-b-2 border-emerald-800/40 placeholder:text-gray-500 focus:outline-none focus:bg-emerald-200 focus:border-emerald-800 transition-colors" 
 
-const ContactForm = () => {
-    const [form, setForm] = useState({name: "", phone: "", email: "", notes: ""})
+const ContactForm = ({contact}: ContactFormProps) => {
+
+    const [form, setForm] = useState({
+        name: contact ? contact.name : "",
+        phone: contact ? contact.phone : "",
+        email: contact ? (contact.email ?? "") : "",
+        notes: contact ? (contact.notes ?? "") : "",
+    })
+
     const [error, setError] = useState("")
     const router = useRouter()
 
@@ -43,11 +55,17 @@ const ContactForm = () => {
         }
 
         try {
-            await createContact(trimmedData)
+            if(contact) {
+                await updateContact(contact.id, trimmedData)
+            } else {
+                await createContact(trimmedData)
+            }
+
             router.push("/")
+                
         } catch (err) {
             console.error(err)
-            setError("Could not create contact. Please try again.")
+            setError("Could not save contact. Please try again.")
         }
     }
 
@@ -98,7 +116,7 @@ const ContactForm = () => {
             <button 
                 type="submit" 
                 className="bg-emerald-700 text-xl rounded-lg text-white p-2 cursor-pointer hover:bg-emerald-800 shadow-md hover:text-emerald-200 transition">
-                    Add Contact
+                    {contact ? "Update Contact" : "Add Contact"}
             </button>
 
         </form>

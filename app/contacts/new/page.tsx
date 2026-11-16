@@ -6,7 +6,7 @@ const ContactFormPage = () => {
     return (
         <main className="flex flex-col items-center gap-13">
             <Link 
-                aria-label="back to contact list" 
+                aria-label="Back to contact list" 
                 className="text-emerald-900 self-start mt-2 p-2 hover:text-emerald-700 transition" 
                 href="/">
                     <ChevronLeft size={30} strokeWidth={3} />
