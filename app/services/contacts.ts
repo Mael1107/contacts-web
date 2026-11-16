@@ -13,7 +13,7 @@ export const getContacts = async (): Promise<Contact[]> => {
   return response.data
 }
 
-export const createContact = async (data: ContactInputData ): Promise<Contact> => {
+export const createContact = async ( data: ContactInputData ): Promise<Contact> => {
     const response = await api.post<Contact>("/contacts", { contact: data })
     return response.data
 }
@@ -28,4 +28,4 @@ export const updateContact = async ( id: number, data: ContactInputData ): Promi
     return response.data
 }
 
-export const deleteContact = async (id: number): Promise<void> => await api.delete(`/contacts/${id}`)
+export const deleteContact = async ( id: number ): Promise<void> => await api.delete(`/contacts/${id}`)

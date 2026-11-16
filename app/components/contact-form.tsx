@@ -9,7 +9,7 @@ interface ContactFormProps {
     contact?: Contact
 }
 
-const inputClass = "w-full p-2 rounded-md border-b-2 border-emerald-800/40 placeholder:text-gray-500 focus:outline-none focus:bg-emerald-200 focus:border-emerald-800 transition-colors" 
+const inputClass = "w-full px-2 py-4 rounded-md border-b-2 border-emerald-800/40 placeholder:text-gray-500 focus:outline-none focus:bg-emerald-200 focus:border-emerald-800 transition-colors md:text-lg" 
 
 const ContactForm = ({contact}: ContactFormProps) => {
 
@@ -70,14 +70,22 @@ const ContactForm = ({contact}: ContactFormProps) => {
     }
 
     return (
-        <form noValidate onSubmit={handleSubmit} className="flex flex-col max-w-xs w-full gap-6 text-emerald-900 font-semibold">
+        <form 
+            noValidate onSubmit={handleSubmit} 
+            className="flex flex-col max-w-xs w-full gap-6 text-emerald-900 font-semibold md:max-w-md"
+        >
 
-            {error && <div role="alert" className="flex justify-between gap-3 items-center bg-red-50 text-red-700 border-l-4 border-red-500 rounded-md p-3 text-sm">
-                <CircleAlert size={26} strokeWidth={3} />
-                <p>{error}</p>
-            </div>}
+            {error && 
+                <div 
+                    role="alert" 
+                    className="flex justify-between gap-3 items-center bg-red-50 text-red-700 border-l-4 border-red-500 rounded-md p-3 text-sm"
+                >
+                    <CircleAlert size={26} strokeWidth={3} />
+                    <p>{error}</p>
+                </div>
+            }
 
-            <div className="flex flex-col gap-3 bg-white p-2 py-4 rounded-lg shadow-lg">
+            <div className="flex flex-col bg-white p-2 gap-2 rounded-lg shadow-lg">
 
                 <input
                 className={inputClass}
@@ -108,14 +116,14 @@ const ContactForm = ({contact}: ContactFormProps) => {
                     value={form.notes}
                     onChange={handleChange}
                     placeholder="Notes"
-                    className={`${inputClass} border-l-2 resize-none`} rows={3}
+                    className={`${inputClass} mt-1 border-l-2 resize-none`} rows={3}
                     >
                 </textarea>
             </div>
 
             <button 
                 type="submit" 
-                className="bg-emerald-700 text-xl rounded-lg text-white p-2 cursor-pointer hover:bg-emerald-800 shadow-md hover:text-emerald-200 transition">
+                className="bg-emerald-700 text-xl rounded-lg text-white p-2 cursor-pointer hover:bg-emerald-800 shadow-md hover:text-emerald-200 hover:-translate-y-1 transition md:py-3 md:text-2xl">
                     {contact ? "Update Contact" : "Add Contact"}
             </button>
 

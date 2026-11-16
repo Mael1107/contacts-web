@@ -17,10 +17,10 @@ const DeleteButton = ({id}: {id: number}) => {
     return (
         <button 
             aria-label="Delete contact" 
-            className="text-emerald-950 cursor-pointer hover:text-white hover:bg-red-500 rounded-lg p-1 transition-all"
+            className=" cursor-pointer hover:text-white hover:bg-red-500 rounded-lg p-1 transition-all"
             onClick={handleDelete}
             >
-                <Trash2 size={21}/>
+                <Trash2 className="size-5 md:size-7" />
         </button>
     )
 }
